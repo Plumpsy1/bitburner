@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
   const host = ns.args[0]
-  const script = ns.args[1]
+  const script = "money.js"
 
   if (!ns.serverExists(host)) {
     ns.tprint(`Server '${host}' does not exist. Aborting.`);
