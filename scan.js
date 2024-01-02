@@ -46,9 +46,9 @@ export async function main(ns) {
     ns.tprint("Server: " + server.serverName);
     ns.tprint("Hacking Level: " + server.serverHackingLevel);
     ns.tprint("Root Access: NO")
+    ns.tprint("------------------------------------");
     }
 
   }
 
-  ns.tprint("------------------------------------");
 }
