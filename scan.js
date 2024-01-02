@@ -3,7 +3,7 @@ export async function main(ns) {
   let infiniteLoopProtection = 9999; // In case you mess with this code, this should save you from getting stuck
 
   let minHackingLevel = 1;
-  let maxHackingLevel = 255;
+  let maxHackingLevel = ns.getHackingLevel;
 
   let serversToScan = ["home"]; // Servers we know about, but have no yet scanned
   let discoveredServers = [];  // Servers we have scanned
