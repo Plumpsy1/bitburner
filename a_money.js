@@ -53,7 +53,7 @@ export async function main(ns) {
           ns.run("port.js",1, servers[i])
           ns.run("r_money.js",1, servers[i])
         }
-        else {
+      else if (servers[i]!= "darkweb"){
           ns.tprint("You require a new program")
         }
       }
