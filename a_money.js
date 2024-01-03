@@ -1,3 +1,4 @@
+
 function scan(ns, parent, server, list) {
   const children = ns.scan(server);
   for (let child of children) {
@@ -42,20 +43,29 @@ export async function main(ns) {
       file = 5
     }
 
-    const servers = list_servers(ns).filter(s => !ns.hasRootAccess(s));
-    let sLen = servers.length;
-    for (let i = 0; i < sLen; i++) {
+    const serversRoot = list_servers(ns).filter(s => !ns.hasRootAccess(s));
+    let sRootLen = serversRoot.length;
+    for (let i = 0; i < sRootLen; i++) {
       let maxLevel = ns.getHackingLevel();
-      let serverLevel = ns.getServerRequiredHackingLevel(servers[i]);
-      let ports = ns.getServerNumPortsRequired(servers[i]);
+      let serverLevel = ns.getServerRequiredHackingLevel(serversRoot[i]);
+      let ports = ns.getServerNumPortsRequired(serversRoot[i]);
       if (serverLevel <= maxLevel) {
         if (ports <= file) {
-          ns.run("port.js",1, servers[i])
-          ns.run("r_money.js",1, servers[i])
+          ns.run("port.js",1, serversRoot[i])
         }
-      else if (servers[i]!= "darkweb"){
+        else if (serversRoot[i]!= "darkweb"){
           ns.tprint("You require a new program")
         }
+      }
+    }
+
+    const serversRam = list_servers(ns).filter(s => ns.hasRootAccess(s));
+    let sRamLen = serversRam.length;
+    for (let i = 0; i < sRamLen; i++) {
+      let serversMaxRam = ns.getServerMaxRam(serversRam[i]);
+      let serversCurRam = ns.getServerUsedRam(serversRam[i])
+      if ((serversMaxRam-serversCurRam)>2.4) {
+        ns.run("r_money.js", 1, serversRam[i])
       }
     }
     await (ns.sleep(60000))
