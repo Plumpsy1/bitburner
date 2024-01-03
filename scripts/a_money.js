@@ -67,6 +67,6 @@ export async function main(ns) {
         ns.run("scripts/r_money.js", 1, serversRam[i])
       }
     }
-    await (ns.sleep(1000))
+    await (ns.sleep(10000))
   }
 }

@@ -16,3 +16,4 @@ node.js      :you can change how much money it saves on line 24
 
 RECCOMENDED ALIASES
 alias "start=run scripts/start.js"
+alias "r=run scripts/r_run"
