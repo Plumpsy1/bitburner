@@ -50,7 +50,7 @@ export async function main(ns) {
       let ports = ns.getServerNumPortsRequired(serversRoot[i]);
       if (serverLevel <= maxLevel) {
         if (ports <= file) {
-          ns.run("port.js",1, serversRoot[i])
+          ns.run("scripts/port.js",1, serversRoot[i])
         }
         else if (serversRoot[i]!= "darkweb"){
           ns.tprint("You require a new program")
@@ -64,7 +64,7 @@ export async function main(ns) {
       let serversMaxRam = ns.getServerMaxRam(serversRam[i]);
       let serversCurRam = ns.getServerUsedRam(serversRam[i])
       if ((serversMaxRam-serversCurRam)>2.4) {
-        ns.run("r_money.js", 1, serversRam[i])
+        ns.run("scripts/r_money.js", 1, serversRam[i])
       }
     }
     await (ns.sleep(60000))
