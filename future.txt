@@ -1,2 +1,7 @@
 farm
-co0ntroller finds best target and hacks
+controller finds best target and run grow hack and weaken
+a_money update to add controller
+a_monjey update to buy its own servers
+those bought serevrs automatically upgarde themselves
+automate buying port openers and tor router
+
