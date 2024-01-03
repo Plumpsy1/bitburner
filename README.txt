@@ -15,6 +15,5 @@ HOW TO CHANGE THEM
 node.js      :you can change how much money it saves on line 24
 
 RECCOMENDED ALIASES
-alias "start=run start.js"
-alias "r=run r_run.js"
+alias "start=run scripts/start.js"
 alias "n=nano"
