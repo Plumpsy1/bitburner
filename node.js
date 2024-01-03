@@ -21,7 +21,7 @@ export async function main(ns) {
 */
 
     // We will not buy anything if there's less money than this ammount
-    var reserveMoney = 2000;
+    var reserveMoney = 0;
     // Number of times to upgrade (shouldn't have to change this)
     var n = 1;
 
