@@ -58,7 +58,6 @@ export async function main(ns) {
         }
       }
     }
-    ns.tprint("No new servers found")
     await (ns.sleep(60000))
   }
 }
