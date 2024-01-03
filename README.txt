@@ -5,6 +5,16 @@ start.js      :runs a_money.js and node.js
 ┃┣-port.js    :part of a_money.js automatically gives root access to the target
 ┃┗-r_money.js :part of a_money.js responsible for moving money.js and executing it on the correct target
 ┃   ┗money.js :hacks grows and weakens target forever
-┣node.js      :automatically upgrades hacknet nodes
+┗node.js      :automatically upgrades hacknet nodes
 
+WHEN TO USE THEM
+r_run        :ussually when you changed code and want to re run it 
+start.js     :used when you augment crash or had to reset your scripts
 
+HOW TO CHANGE THEM
+node.js      :you can change how much money it saves on line 24
+
+RECCOMENDED ALIASES
+alias "start=run start.js"
+alias "r=run r_run.js"
+alias "n=nano"
