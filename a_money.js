@@ -16,29 +16,30 @@ export function list_servers(ns) {
   return list;
 }
 
+/** @param {NS} ns **/
 export async function main(ns) {
-   while (true) {
+  while (true) {
     let file = 0;
 
     if (ns.fileExists("BruteSSH.exe")) {
-      file = file++
+      file = 1
     }
 
     if (ns.fileExists("FTPCrack.exe")) {
-      file = file++
+      file = 2
     }
 
     if (ns.fileExists("relaySMTP.exe")) {
-      file = file++
+      file = 3
     }
 
 
     if (ns.fileExists("HTTPWorm.exe")) {
-      file = file++
+      file = 4
     }
 
     if (ns.fileExists("SQLInject.exe")) {
-      file = file++
+      file = 5
     }
 
     const servers = list_servers(ns).filter(s => !ns.hasRootAccess(s));
@@ -49,14 +50,15 @@ export async function main(ns) {
       let ports = ns.getServerNumPortsRequired(servers[i]);
       if (serverLevel <= maxLevel) {
         if (ports <= file) {
-          ns.exec("port.js",servers[i])
-          ns.exec("r_money.js",servers[i])
+          ns.run("port.js",1, servers[i])
+          ns.run("r_money.js",1, servers[i])
         }
         else {
           ns.tprint("You require a new program")
         }
       }
     }
+    ns.tprint("No new servers found")
     await (ns.sleep(60000))
   }
 }
