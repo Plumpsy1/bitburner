@@ -1,6 +1,6 @@
 export async function main(ns) {
   const host = ns.getHostname();
-  const hackTime = (ns.getHackTme(host)+20)
+  const hackTime = (ns.getHackTime(host)+20)
   const growTime = (ns.getGrowTime(host)+20)
   const weakenTime = (ns.getWeakenTime(host)+20)
 
