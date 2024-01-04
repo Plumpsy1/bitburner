@@ -19,42 +19,43 @@ function list_servers(ns) {
 /** @param {NS} ns **/
 export async function main(ns) {
   while (true) {
-    const port = list_servers(ns).filter(s => !ns.hasRootAccess(s));
-    let pLen = port.length;
-    for (let i = 0; i < pLen; i++) {
+    const host = list_servers(ns).filter(s => !ns.hasRootAccess(s));
+    let hLen = host.length;
+    for (let i = 0; i < hLen; i++) {
       let maxLevel = ns.getHackingLevel();
-      let serverLevel = ns.getServerRequiredHackingLevel(port[i]);
-      let ports = ns.getServerNumPortsRequired(port[i]);
+      let serverLevel = ns.getServerRequiredHackingLevel(host[i]);
+      let ports = ns.getServerNumPortsRequired(host[i]);
+      var portsOpened = 0
       if (serverLevel <= maxLevel) {
-        const openPorts = 0;
+      
         if (ns.fileExists("BruteSSH.exe", "home")) {
-          ns.brutessh(port[i]);
-          const openPorts = 1;
+          ns.brutessh(host[i]);
+          var portsOpened = 1
         }
 
         if (ns.fileExists("FTPCrack.exe", "home")) {
-          ns.ftpcrack(port[i]);
-          const openPorts = 2;
+          ns.ftpcrack(host[i]);
+          var portsOpened = 2
         }
 
         if (ns.fileExists("relaySMTP.exe", "home")) {
-          ns.relaysmtp(port[i]);
-          const openPorts = 3;
+          ns.relaysmtp(host[i]);
+          var portsOpened = 3
         }
         
         if (ns.fileExists("HTTPWorm.exe", "home")) {
-          ns.httpworm(port[i]);
-          const openPorts = 4;
+          ns.httpworm(host[i]);
+          var portsOpened = 4
         }
 
         if (ns.fileExists("SQLInject.exe", "home")) {
-          ns.sqlinject(port[i]);
-          const openPorts = 5;
+          ns.sqlinject(host[i]);
+          var portsOpened = 5
         }
         
-        if(openPorts >= ports){
-          ns.nuke(port[i]);
-          ns.tprint("Nuke complete on " + port[i] + ".");
+        if( portsOpened >= ports){
+          ns.nuke(host[i]);
+          ns.tprint("Nuke complete on " + host[i] + ".");
         }
 
         await (ns.sleep(10000))
