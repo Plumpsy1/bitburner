@@ -24,7 +24,6 @@ export async function main(ns) {
       const hackedHosts = ["n00dles"]
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
-              ns.tprint(`Hacking new server ${host[i]}.`)
               ns.run("scriptsV2/r_money.js", 1, host[i])
               hackedHosts.push(host[i])
           }
