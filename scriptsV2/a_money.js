@@ -1,12 +1,12 @@
 function scan(ns, parent, server, list) {
   const children = ns.scan(server);
   for (let child of children) {
-    if (parent == child) {
-      continue;
-    }
-    list.push(child);
+      if (parent == child) {
+          continue;
+      }
+      list.push(child);
 
-    scan(ns, server, child, list);
+      scan(ns, server, child, list);
   }
 }
 
@@ -19,15 +19,22 @@ function list_servers(ns) {
 /** @param {NS} ns **/
 export async function main(ns) {
   while (true) {
-    const target = list_servers(ns).filter(s => ns.hasRootAccess(s));
-    let tLen = target.length;
-    for (let i = 0; i < tLen; i++) {
-      let serversMaxRam = ns.getServerMaxRam(target[i]);
-      let serversCurRam = ns.getServerUsedRam(target[i])
-      if ((serversMaxRam-serversCurRam)>2.4) {
-        ns.run("scriptsV2/r_money.js", 1, target[i])
+      ns.tprint("constant loop")
+      const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
+      const hLen = host.length;
+      const hackedHosts = ["n00dles"]
+      ns.tprint(host)
+      for (let i = 0; i < hLen; i++) {
+          if (!hackedHosts.includes(host[i])) {
+              ns.tprint(`found new hack ${host[i]} and pushing the array`)
+              ns.run("scriptsV2/r_money.js", 1, host[i])
+              hackedHosts.push(host[i])
+          }
+
       }
-    }
-    await (ns.sleep(10000))
+      ns.tprint(`these are all the values in the array ${hackedHosts}`)
+      await (ns.sleep(1000000))
   }
 }
+
+

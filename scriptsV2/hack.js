@@ -1,5 +1,5 @@
 /** @param {NS} ns */
 export async function main(ns) {
-    const target = args[0];
-    ns.hack(target);
+    const target = ns.args[0];
+    await(ns.hack(target));
 }

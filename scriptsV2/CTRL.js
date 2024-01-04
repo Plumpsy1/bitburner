@@ -5,10 +5,10 @@ export async function main(ns) {
             ns.run("scriptsV2/a_money.js")
         }
         if(!ns.scriptRunning("scriptsV2/node.js","home")){
-            ns.run("scriptsV2/node.js")
+            ns.run("scriptsV2/node.js",1,0)
         }
-        if(!ns.scriptRunning("scriptsV2/port.js","home")){
-            ns.run("scriptsV2/port.js")
+        if(!ns.scriptRunning("scriptsV2/root.js","home")){
+            ns.run("scriptsV2/root.js")
         }
         await(ns.sleep(60000))    
     }
