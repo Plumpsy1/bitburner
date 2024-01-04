@@ -72,7 +72,7 @@ export async function main(ns) {
         
           ns.nuke(port[i]);
         
-          ns.tprint("Nuke complete on " + port[i] + ".");
+          await(ns.tprint("Nuke complete on " + port[i] + "."));
         }
         else if (serversRoot[i]!= "darkweb"){
           ns.tprint("You require a new program")
