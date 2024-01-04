@@ -26,30 +26,30 @@ export async function main(ns) {
       let serverLevel = ns.getServerRequiredHackingLevel(port[i]);
       let ports = ns.getServerNumPortsRequired(port[i]);
       if (serverLevel <= maxLevel) {
-        var openPorts = 0;
+        const openPorts = 0;
         if (ns.fileExists("BruteSSH.exe", "home")) {
           ns.brutessh(port[i]);
-          var openPorts = 1;
+          const openPorts = 1;
         }
 
         if (ns.fileExists("FTPCrack.exe", "home")) {
           ns.ftpcrack(port[i]);
-          var openPorts = 2;
+          const openPorts = 2;
         }
 
         if (ns.fileExists("relaySMTP.exe", "home")) {
           ns.relaysmtp(port[i]);
-          var openPorts = 3;
+          const openPorts = 3;
         }
         
         if (ns.fileExists("HTTPWorm.exe", "home")) {
           ns.httpworm(port[i]);
-          var openPorts = 4;
+          const openPorts = 4;
         }
 
         if (ns.fileExists("SQLInject.exe", "home")) {
           ns.sqlinject(port[i]);
-          var openPorts = 5;
+          const openPorts = 5;
         }
         
         if(openPorts >= ports){
