@@ -19,11 +19,9 @@ function list_servers(ns) {
 /** @param {NS} ns **/
 export async function main(ns) {
   while (true) {
-      ns.tprint("constant loop")
       const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
       const hLen = host.length;
       const hackedHosts = ["n00dles"]
-      ns.tprint(host)
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
               ns.tprint(`found new hack ${host[i]} and pushing the array`)
@@ -32,7 +30,6 @@ export async function main(ns) {
           }
 
       }
-      ns.tprint(`these are all the values in the array ${hackedHosts}`)
       await (ns.sleep(1000000))
   }
 }
