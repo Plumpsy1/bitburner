@@ -1,8 +1,8 @@
 export async function main(ns) {
   const host = ns.getHostname();
-  const hackTime = ns.getHackTime(host);
-  const growTime = ns.getGrowTime(host);
-  const weakenTime = ns.getWeakenTime(host);
+  const hackTime = (ns.getHackTme(host)+20)
+  const growTime = (ns.getGrowTime(host)+20)
+  const weakenTime = (ns.getWeakenTime(host)+20)
 
   while (true) {
 
@@ -32,7 +32,7 @@ export async function main(ns) {
         await ns.sleep(hackTime)
       }
     }
-
+    await ns.sleep(1)
   }
 }
   
