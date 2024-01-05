@@ -25,6 +25,11 @@ export async function main(ns) {
     // Number of times to upgrade (shouldn't have to change this)
     var n = 1;
 
+    ns.disableLog("getServerMoneyAvailable");
+    ns.disableLog("sleep");
+
+    ns.tail();
+
     ns.print('Waiting to purchase next upgrade...');
 
     // Buy first ns.hacknetNode if there are none
@@ -33,7 +38,7 @@ export async function main(ns) {
         ns.getServerMoneyAvailable("home") >= reserveMoney
     ) {
         ns.hacknet.purchaseNode();
-
+        displayDashBoard(ns);
     }
 
     // If there are no ns.hacknet Nodes, we can't do anything, so the script ends.
@@ -45,21 +50,21 @@ export async function main(ns) {
                     ns.hacknet.getLevelUpgradeCost(i, n) < Infinity &&
                     ns.hacknet.upgradeLevel(i, n)
                 ) {
-
+                    displayDashBoard(ns);
                     await ns.sleep(100);
                 }
                 while (
                     ns.hacknet.getRamUpgradeCost(i, n) < Infinity &&
                     ns.hacknet.upgradeRam(i, n)
                 ) {
-
+                    displayDashBoard(ns);
                     await ns.sleep(100);
                 }
                 while (
                     ns.hacknet.getCoreUpgradeCost(i, n) < Infinity &&
                     ns.hacknet.upgradeCore(i, n)
                 ) {
-
+                    displayDashBoard(ns);
                     await ns.sleep(100);
                 }
             } // END for (i = 0; i < ns.hacknet.numNodes(); i++)
@@ -77,6 +82,7 @@ export async function main(ns) {
                 if (ns.hacknet.numNodes() < 23) {
                     ns.hacknet.purchaseNode();
 
+                    displayDashBoard(ns);
                 }
             } else if (
                 /*
@@ -89,6 +95,7 @@ export async function main(ns) {
             ) {
                 ns.hacknet.purchaseNode();
 
+                displayDashBoard(ns);
             }
             await ns.sleep(100);
         }
@@ -96,3 +103,72 @@ export async function main(ns) {
     }
 };
 
+/** @param {import(".").NS } ns */
+function displayDashBoard(ns) {
+
+    ns.clearLog();
+    let nodes = Array(ns.hacknet.numNodes()).fill(0);
+    let maxNodes = ns.hacknet.numNodes() < 23 ? 23 : Infinity
+    ns.print(`Nodes: ${nodes.length} of ${maxNodes}`);
+    ns.print(`Total Production: ${nodes.length === 0 ? "$0 /s" : ns.nFormat(nodes.map((v, i) => ns.hacknet.getNodeStats(i).production).reduce((a, b) => a + b), MoneyFormat)} /s`)
+    ns.print(`Total Produced: ${nodes.length === 0 ? "$0" : ns.nFormat(nodes.map((v, i) => ns.hacknet.getNodeStats(i).totalProduction).reduce((a, b) => a + b), MoneyFormat)}`)
+    ns.print(table(
+        ["Node", "Produced", "Uptime", "Production", "Lv", "RAM", "Cores"],
+        nodes.map((v, i) => ns.hacknet.getNodeStats(i).name),
+        nodes.map((v, i) => ns.nFormat(ns.hacknet.getNodeStats(i).totalProduction, MoneyFormat)),
+        nodes.map((v, i) => ns.nFormat(ns.hacknet.getNodeStats(i).timeOnline, TimeFormat)),
+        nodes.map((v, i) => `${ns.nFormat(ns.hacknet.getNodeStats(i).production, MoneyFormat)} /s`),
+        nodes.map((v, i) => `${ns.hacknet.getNodeStats(i).level}`),
+        nodes.map((v, i) => `${ns.hacknet.getNodeStats(i).ram}`),
+        nodes.map((v, i) => `${ns.hacknet.getNodeStats(i).cores}`),
+    ));
+}
+
+const MaxReducer = (a, b) => a > b ? a : b;
+
+/**
+ * Create a Table display of the provided data
+ * @param {string[]} headers Column Headers
+ * @param  {...string[]} columns Column data
+ */
+function table(headers, ...columns) {
+    // Calculate Column Widths
+    let widths = [];
+    // for (let i = 0; i < columns.length; i++) {
+    //     widths[i] = columns[i].concat([headers[i]]).map(s => s.length).reduce(MaxReducer);
+    // }
+    columns.forEach((c, i) => {
+        widths[i] = c.concat([headers[i]]).map(s => s.length).reduce(MaxReducer);
+    });
+
+    let output = "\n";
+
+    // Write Headers
+    headers.forEach((h, i) => {
+        output += ` ${h.padEnd(widths[i], " ")} |`;
+    });
+
+    output += "\n";
+
+    // Write Separator
+    headers.forEach((h, i) => {
+        output += `${"".padEnd(widths[i] + 2, "=")}|`;
+    });
+
+    output += "\n";
+
+    let rows = columns[0].length;
+    for (let row = 0; row < rows; row++) {
+        columns.forEach((c, i) => {
+            if (c[row] == "-") {
+                output += ` ${"".padEnd(widths[i], "-")} |`;
+            } else {
+                output += ` ${c[row].padEnd(widths[i], " ")} |`;
+            }
+        });
+
+        output += "\n";
+    }
+
+    return output;
+}

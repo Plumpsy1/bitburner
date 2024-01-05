@@ -10,6 +10,9 @@ export async function main(ns) {
         if(!ns.scriptRunning("scriptsV2/root.js","home")){
             ns.run("scriptsV2/root.js")
         }
+        if(!ns.scriptRunning("scriptsV2/farm.js","home")){
+            ns.run("scriptsV2/farm.js")
+        }
         await(ns.sleep(60000))    
     }
 }

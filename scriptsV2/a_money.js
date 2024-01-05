@@ -21,7 +21,7 @@ export async function main(ns) {
   while (true) {
       const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
       const hLen = host.length;
-      const hackedHosts = ["n00dles"]
+      const hackedHosts = ["n00dles","server0","server1","server2","server3","server4","server5","server6","server7","server8","server9"]
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
               ns.run("scriptsV2/r_money.js", 1, host[i])
