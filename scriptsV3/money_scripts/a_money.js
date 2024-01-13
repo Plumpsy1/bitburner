@@ -18,13 +18,14 @@ function list_servers(ns) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
+  await ns.sleep(10000)
   while (true) {
       const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
       const hLen = host.length;
       const hackedHosts = []
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
-              ns.run("scriptsV3/r_money.js", 1)
+              ns.run("scriptsV3/money_scripts/r_money.js", 1,host[i] )
               hackedHosts.push(host[i])
           }
       }

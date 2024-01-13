@@ -1,20 +1,42 @@
+const MoneyFormat = '$0.0a';
+const TimeFormat = '00:00:00';
+
 /** @param {import(".").NS } ns */
 export async function main(ns) {
 
-    let reserveMoney = ns.args[0];
-    let moneyAvailable =  ns.getServerMoneyAvailable("home") - reserveMoney
+    /*
+    ns.hacknet-auto.script for Bitburner v0.47.2
+    Winners don't use copyright
+    
+    Latest version of this script should be at
+        https://github.com/iuriguilherme/netscripts.d
+    Bitburner should be at https://github.com/danielyxie/bitburner
+    
+    This script requires 5.70 GB of RAM to run for 1 thread(s)
+    
+    This script will buy a ns.hacknet Node, fully upgrade it and then buy the next
+    one in an infinite loop. If the cost of the next upgrade is higher than 
+    buying a new ns.hacknet Node, then a new one will be bought before the last one
+    is upgraded. There is an option to set the budget limit.
+*/
 
+    // We will not buy anything if there's less money than this ammount
+    let reserveMoney = ns.args[0];
+    // Number of times to upgrade (shouldn't have to change this)
     var n = 1;
 
     ns.print('Waiting to purchase next upgrade...');
 
+    // Buy first ns.hacknetNode if there are none
     if (
         ns.hacknet.numNodes() === 0 &&
-        moneyAvailable >= ns.hacknet.purchaseNode()
+        ns.getServerMoneyAvailable("home") >= reserveMoney
     ) {
         ns.hacknet.purchaseNode();
+
     }
 
+    // If there are no ns.hacknet Nodes, we can't do anything, so the script ends.
     while (ns.hacknet.numNodes() > 0) {
         // If there is not enough money, we wait for it instead of ending the loop.
         while (ns.getServerMoneyAvailable("home") >= reserveMoney) {
