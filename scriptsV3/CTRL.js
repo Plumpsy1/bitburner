@@ -11,9 +11,9 @@ export async function main(ns) {
         if(!ns.scriptRunning("scriptsV3/untility_scripts/root.js","home")){
             ns.run("scriptsV3/untility_scripts/root.js")
         }
-        //if(!ns.scriptRunning("scriptsV3/farm_scripts/farm.js","home")){
-        //   ns.run("scriptsV3/farm_scripts/farm.js")
-        //}
+        if(!ns.scriptRunning("scriptsV3/farm_scripts/farm.js","home")){
+           ns.run("scriptsV3/farm_scripts/farm.js")
+        }
         if(!ns.scriptRunning("scriptsV3/money_scripts/target.js","home")){
             ns.run("scriptsV3/money_scripts/target.js")
         }

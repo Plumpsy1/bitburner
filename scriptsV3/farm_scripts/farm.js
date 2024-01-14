@@ -29,12 +29,15 @@ export async function main(ns) {
             if(!activeServers.includes(fServersFound[i])){
                 activeServers.push(fServersFound[i])
             }
+            await ns.sleep(1)
+            
         }
 
         for(var i = 0 ; ns.getServerMoneyAvailable("home")> 880000; i++){
             let buyServerName = `fserv${fServersFoundLength+i}`
             ns.purchaseServer(buyServerName,16)
             activeServers.push(buyServerName)
+            await ns.sleep(1)
         }
 
         for(var i = 0 , ramUpgradeAmount = 32, price = 1720000; i  < activeServersLength && ns.getServerMoneyAvailable("home")>price && ramUpgradeAmount > 1024; i++ , ramUpgradeAmount*2, price*2){
@@ -42,6 +45,7 @@ export async function main(ns) {
             if(activeServersRam < ramUpgradeAmount){
                 ns.upgradePurchasedServer(activeServers[i],ramUpgradeAmount)
             }
+            await ns.sleep(1)
         }
         await ns.sleep(100)
     }
