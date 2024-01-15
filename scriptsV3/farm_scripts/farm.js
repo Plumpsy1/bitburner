@@ -18,35 +18,32 @@ function scan(ns, parent, server, list) {
   
 /** @param {NS} ns */
 export async function main(ns) {
-    const activeServers = []
-    const activeServersLength = activeServers.length
+    await ns.sleep(1000)
+
     const fServersFound = list_servers(ns).filter(s => s.includes("fserv"));
     const fServersFoundLength = fServersFound.length
+    let ramUpgradeAmount = 32
+    let price = 1720000
 
     while(true){
 
-        for(var i = 0 ; i  < fServersFoundLength; i++){
-            if(!activeServers.includes(fServersFound[i])){
-                activeServers.push(fServersFound[i])
-            }
             await ns.sleep(1)
-            
-        }
 
-        for(var i = 0 ; ns.getServerMoneyAvailable("home")> 880000; i++){
-            let buyServerName = `fserv${fServersFoundLength+i}`
+        for(var i = 0 ; ns.getServerMoneyAvailable("home") > 880000 && i <= fServersFoundLength ; i++){
+            let buyServerName = `fserv`
             ns.purchaseServer(buyServerName,16)
-            activeServers.push(buyServerName)
             await ns.sleep(1)
         }
 
-        for(var i = 0 , ramUpgradeAmount = 32, price = 1720000; i  < activeServersLength && ns.getServerMoneyAvailable("home")>price && ramUpgradeAmount > 1024; i++ , ramUpgradeAmount*2, price*2){
-            const activeServersRam = getServerMaxRam(activeServers[i])
-            if(activeServersRam < ramUpgradeAmount){
-                ns.upgradePurchasedServer(activeServers[i],ramUpgradeAmount)
+        for(i = 0; i  < fServersFoundLength && ns.getServerMoneyAvailable("home") > price && ramUpgradeAmount <= 196608; i++){
+            let fServersFoundRam = ns.getServerMaxRam(fServersFound[i])
+            if(fServersFoundRam < ramUpgradeAmount){
+                ns.upgradePurchasedServer(fServersFound[i],ramUpgradeAmount)
             }
             await ns.sleep(1)
         }
+        ramUpgradeAmount = ramUpgradeAmount*2
+        price = price*2
         await ns.sleep(100)
     }
 }
