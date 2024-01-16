@@ -5,7 +5,7 @@ export async function main(ns) {
 
   while (true) {
       if (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
-        const script = "scriptsV3/money_scripts/grow.js";
+        const script = "scriptsV3/money_scripts/weaken.js";
         const threads = Math.floor((ns.getServerMaxRam(host) - ns.getServerUsedRam(host)) / ns.getScriptRam(script));
         if (threads > 0){
           await ns.exec(script,host,threads,target);
@@ -13,7 +13,7 @@ export async function main(ns) {
         }
       }
     
-      else if (ns.getServerMoneyAvailable(target) < ns.getServerMaxMoney(target)) {
+      else if (ns.getServerMoneyAvailable(target) < (ns.getServerMaxMoney(target)*0.95)) {
         const script = "scriptsV3/money_scripts/grow.js";
         const threads = Math.floor((ns.getServerMaxRam(host) - ns.getServerUsedRam(host)) / ns.getScriptRam(script));
         if (threads > 0){
@@ -23,7 +23,7 @@ export async function main(ns) {
       }
     
       else {
-        const script = "scriptsV3/money_scripts/grow.js";
+        const script = "scriptsV3/money_scripts/hack.js";
         const threads = Math.floor((ns.getServerMaxRam(host) - ns.getServerUsedRam(host)) / ns.getScriptRam(script));
         if (threads > 0){
           await ns.exec(script,host,threads,target);
