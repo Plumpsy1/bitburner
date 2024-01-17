@@ -1,19 +1,20 @@
 /** @param {NS} ns */
 export async function main(ns) {
       while(true){
-      const hackingLevel = ns.getHackingLevel()
-
-      if(hackingLevel > 0 && hackingLevel < 10 && ns.hasRootAccess("foodnstuff") && ns.peek(1) !== "foodnstuff"){
+      
+      if(ns.hasRootAccess("phantasy")){
         ns.clearPort(1)
-        ns.writePort(1,"foodnstuff")
+        ns.writePort(1,"phantasy")
       }
-      if(hackingLevel > 9 && hackingLevel < 100 && ns.hasRootAccess("joesguns") && ns.peek(1) !== "joesguns"){
+
+      else if(ns.hasRootAccess("joesguns")){
         ns.clearPort(1)
         ns.writePort(1,"joesguns")
       }
-      if(hackingLevel > 99 && ns.hasRootAccess("phantasy") && ns.peek(1) !== "phantasy"){
+
+      else if(ns.hasRootAccess("foodnstuff")){
         ns.clearPort(1)
-        ns.writePort(1,"phantasy")
+        ns.writePort(1,"foodnstuff")
       }
       await ns.sleep(1)
     }
