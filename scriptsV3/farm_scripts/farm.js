@@ -35,7 +35,7 @@ export async function main(ns) {
             await ns.sleep(1)
         }
 
-        for(i = 0; i  < fServersFoundLength && ns.getServerMoneyAvailable("home") > price && ramUpgradeAmount <= 196608; i++){
+        for(i = 0; i  < fServersFoundLength && ns.getServerMoneyAvailable("home") > price; i++){
             let fServersFoundRam = ns.getServerMaxRam(fServersFound[i])
             if(fServersFoundRam < ramUpgradeAmount){
                 ns.upgradePurchasedServer(fServersFound[i],ramUpgradeAmount)
