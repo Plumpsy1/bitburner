@@ -2,7 +2,6 @@ export async function main(ns) {
   const host = ns.getHostname();
   let target = ns.peek(1)
 
-
   while (true) {
       if (ns.getServerSecurityLevel(target) > ns.getServerMinSecurityLevel(target)) {
         const script = "scriptsV3/money_scripts/weaken.js";

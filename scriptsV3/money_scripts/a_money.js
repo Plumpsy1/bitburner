@@ -19,6 +19,7 @@ function list_servers(ns) {
 /** @param {NS} ns **/
 export async function main(ns) {
   while (true) {
+      await ns.sleep(100)
       const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
       const hLen = host.length;
       const hackedHosts = []
