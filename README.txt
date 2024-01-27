@@ -1,4 +1,4 @@
-*****use scriptsV2 only*****
+*****use scriptsV3 only*****
 
 ALIASES
 alias "start=run scriptsV3/CTRL.js"
