@@ -1,0 +1,12 @@
+WHATS NEEDED 
+server with root access
+server with free RAM
+hack.js installed
+
+HOW TO INSTALL hack.js
+type in home terminal: 
+"scp hack.js (desired server name)"
+
+HOW TO RUN
+type in the server it is going to be run in
+"run hack.js (server it will hack)"
