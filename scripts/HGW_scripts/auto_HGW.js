@@ -19,13 +19,21 @@ function list_servers(ns) {
 /** @param {NS} ns **/
 export async function main(ns) {
   while (true) {
+      await ns.sleep(10000)
       const host = list_servers(ns).filter(s => ns.hasRootAccess(s));
       const hLen = host.length;
-      const hackedHosts = ["n00dles","server0","server1","server2","server3","server4","server5","server6","server7","server8","server9"]
+      const hackedHosts = []
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
-              ns.run("scriptsV2/r_money.js", 1, host[i])
+            if (!ns.scriptRunning("scripts/HGW_scripts/HGW.js",host[i])){
+              ns.scp("scripts/HGW_scripts/grow.js", host[i]);
+              ns.scp("scripts/HGW_scripts/hack.js", host[i]);
+              ns.scp("scripts/HGW_scripts/weaken.js", host[i]);
+              ns.scp("v/HGW_scripts/HGW.js", host[i]);
+        
+              ns.exec("scripts/HGW_scripts/HGW.js",host[i]);
               hackedHosts.push(host[i])
+            }
           }
       }
       await (ns.sleep(60000))

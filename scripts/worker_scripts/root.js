@@ -58,10 +58,11 @@ export async function main(ns) {
           ns.tprint("Nuke complete on " + host[i] + ".");
         }
 
-        await (ns.sleep(10000))
+        await (ns.sleep(100))
       }
-      await (ns.sleep(1))
+      await (ns.sleep(100))
     }
+    await (ns.sleep(100))
   }
 }
      

@@ -3,7 +3,7 @@ export async function main(ns) {
 
 
     while(true){
-        for (var i = 0; i < ns.Hacknet.numNodes() && i < 19;i++) {
+        for (var i = 0; i < ns.hacknet.numNodes() && i < 19;i++) {
 
             if(ns.getServerMoneyAvailable("home") >= (ns.hacknet.getPurchaseNodeCost(i+1, 1)) ){
                 ns.hacknet.purchaseNode(i+1, 1)
