@@ -9,7 +9,7 @@ export async function main(ns) {
             ns.run("scripts/worker_scripts/node.js")
         }
         if(!ns.scriptRunning("scripts/worker_scripts/root.js","home")){
-            ns.run("scripts/worker_scripts/root.js")
+           ns.run("scripts/worker_scripts/root.js")
         }
         if(!ns.scriptRunning("scripts/worker_scripts/farm.js","home")){
            ns.run("scripts/worker_scripts/farm.js")
@@ -23,4 +23,5 @@ export async function main(ns) {
         
         await(ns.sleep(60000))    
     }
+
 }
