@@ -29,7 +29,7 @@ export async function main(ns) {
               ns.scp("scripts/HGW_scripts/grow.js", host[i]);
               ns.scp("scripts/HGW_scripts/hack.js", host[i]);
               ns.scp("scripts/HGW_scripts/weaken.js", host[i]);
-              ns.scp("v/HGW_scripts/HGW.js", host[i]);
+              ns.scp("scripts/HGW_scripts/HGW.js", host[i]);
         
               ns.exec("scripts/HGW_scripts/HGW.js",host[i]);
               hackedHosts.push(host[i])

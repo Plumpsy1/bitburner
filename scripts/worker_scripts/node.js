@@ -1,8 +1,11 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-
+    if (ns.hacknet.numNodes() == 0){
+        ns.hacknet.purchaseNode(1)
+    }
 
     while(true){
+
         for (var i = 0; i < ns.hacknet.numNodes() && i < 19;i++) {
 
             if(ns.getServerMoneyAvailable("home") >= (ns.hacknet.getPurchaseNodeCost(i+1, 1)) ){
@@ -17,7 +20,8 @@ export async function main(ns) {
             if( ns.getServerMoneyAvailable("home") >= (ns.hacknet.getCoreUpgradeCost(i, 1)) ){
                 ns.hacknet.upgradeCore(i, 1)
             }
-            await ns.sleep(100)
+
+            await ns.sleep(1000)
         }
     }
 }
