@@ -1,27 +1,36 @@
+async function run(ns, scripts, sLen) {
+
+    for (let i = 0; i < sLen; i++){
+
+        if (!ns.scriptRunning(scripts[i],"home")){
+            
+            ns.run(scripts[i],1,"home")
+
+        }
+
+    }
+
+}
+
 /** @param {NS} ns */
 export async function main(ns) {
+
     while(true){
+
+        const scripts = [
+        "scripts/HGW_scripts/auto_HGW.js",
+        "scripts/worker_scripts/root.js",
+        "scripts/worker_scripts/node.js",
+        "scripts/worker_scripts/farm.js",
+        "scripts/worker_scripts/target.js"
+        ]
+
+        const sLen = scripts.length;       
+
+        run(ns,scripts, sLen)
         
-        if(!ns.scriptRunning("scripts/HGW_scripts/auto_HGW.js","home")){
-            ns.run("scripts/HGW_scripts/auto_HGW.js")
-        }
-        if(!ns.scriptRunning("scripts/worker_scripts/node.js","home")){
-            ns.run("scripts/worker_scripts/node.js")
-        }
-        if(!ns.scriptRunning("scripts/worker_scripts/root.js","home")){
-           ns.run("scripts/worker_scripts/root.js")
-        }
-        if(!ns.scriptRunning("scripts/worker_scripts/farm.js","home")){
-           ns.run("scripts/worker_scripts/farm.js")
-        }
-        if(!ns.scriptRunning("scripts/HGW_scripts/target.js","home")){
-            ns.run("scripts/HGW_scripts/target.js")
-        }
-        //if(!ns.scriptRunning("scripts/worker_scripts/gang.js","home")){
-        //    ns.run("scripts/worker_scripts/gang.js")
-        //}
-        
-        await(ns.sleep(60000))    
+        await ns.sleep(60000)
+
     }
 
 }
