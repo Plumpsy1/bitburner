@@ -4,7 +4,7 @@ export async function main(ns) {
         ns.hacknet.purchaseNode(1)
     }
 
-    while(true){
+    while(true && 21 >  ns.hacknet.numNodes()){
 
         for (var i = 0; i < ns.hacknet.numNodes() && i < 19;i++) {
 
