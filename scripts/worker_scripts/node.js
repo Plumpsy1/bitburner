@@ -1,12 +1,12 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-    if (ns.hacknet.numNodes() == 0){
+    if (ns.hacknet.numNodes() == 0 && ns.hacknet.numNodes() < 20){
         ns.hacknet.purchaseNode(1)
     }
 
-    while(true && 21 >  ns.hacknet.numNodes()){
+    while(true){
 
-        for (var i = 0; i < ns.hacknet.numNodes() && i < 19;i++) {
+        for (var i = 0; i < ns.hacknet.numNodes() && i < 19 ;i++) {
 
             if(ns.getServerMoneyAvailable("home") >= (ns.hacknet.getPurchaseNodeCost(i+1, 1)) ){
                 ns.hacknet.purchaseNode(i+1, 1)
