@@ -25,7 +25,7 @@ export async function main(ns) {
       const hackedHosts = []
       for (let i = 0; i < hLen; i++) {
           if (!hackedHosts.includes(host[i])) {
-            if (!ns.scriptRunning("scripts/HGW_scripts/HGW.js",host[i])){
+            if (!ns.scriptRunning("scripts/HGW_scripts/HGW.js",host[i]) && ns.getServerMaxRam(host[i]) > 6){
               ns.scp("scripts/HGW_scripts/grow.js", host[i]);
               ns.scp("scripts/HGW_scripts/hack.js", host[i]);
               ns.scp("scripts/HGW_scripts/weaken.js", host[i]);
